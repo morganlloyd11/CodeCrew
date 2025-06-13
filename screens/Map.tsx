@@ -7,6 +7,9 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 // components from react native
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 
+// mobile button
+import { RectButton } from 'react-native-gesture-handler';
+
 // navigation props
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
@@ -20,9 +23,17 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Map'>;
 export default function Map({ route, navigation }: Props) {
   const { githubUsername } = route.params;
 
+  // function to send user back to SignIn screen
+  const handleSignOut = () => {
+    navigation.replace('SignIn');
+  };
+
   return (
     <View style={styles.container}>
         {/* set up the size and location of map */}
+        <RectButton style={styles.logoutButton} onPress={handleSignOut}>
+        <Text style={styles.logoutText}>Sign Out</Text>
+      </RectButton>
       <MapView
         style={styles.map}
         // coordinates for me 
@@ -40,7 +51,7 @@ export default function Map({ route, navigation }: Props) {
             longitude: -114.0719,
           }}
         >
-          {/*makes the pin clickable */}
+          {/*make the pin clickable */}
           <Callout
             onPress={() => {
               // go to profile screen when pin is tapped
@@ -77,4 +88,19 @@ const styles = StyleSheet.create({
     fontSize: 15,
     color: 'gray',
   },
+
+   logoutButton: {
+    position: 'absolute',
+    top: 48,
+    right: 24,
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: '#bc9bf3',
+    borderRadius: 6,
+    zIndex: 1,
+  },
+  logoutText: {
+    color: 'white',
+    fontSize: 14,
+  }
 });
