@@ -1,21 +1,17 @@
-import { StyleSheet, Text, View } from 'react-native';
-import Header from './components/Header';
+// import react
+import React from 'react';
 
+// import nav container to wrap app
+import { NavigationContainer } from '@react-navigation/native';
+
+// import app nav that defines the screens
+import AppNavigator from './navigation/AppNavigator';
+
+// root component 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Header></Header>
-      <Text>CodeCrew</Text>
-      <Text>collaborate. chill. code.</Text>
-    </View>
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
