@@ -7,6 +7,9 @@ import MapView, { Marker, Callout } from 'react-native-maps';
 // components from react native
 import { View, StyleSheet, Dimensions, Text } from 'react-native';
 
+// import user marker component
+import UserMarker from '../components/UserMarker';
+
 // mobile button
 import { RectButton } from 'react-native-gesture-handler';
 
@@ -30,13 +33,14 @@ export default function Map({ route, navigation }: Props) {
 
   return (
     <View style={styles.container}>
-        {/* set up the size and location of map */}
+        {/* sign out button */}
         <RectButton style={styles.logoutButton} onPress={handleSignOut}>
         <Text style={styles.logoutText}>Sign Out</Text>
       </RectButton>
+      {/* set up the size and location of map */}
       <MapView
         style={styles.map}
-        // coordinates for me 
+        // hard coded coordinates for dt yyc 
         initialRegion={{
           latitude: 51.0447,
           longitude: -114.0719,
@@ -44,27 +48,14 @@ export default function Map({ route, navigation }: Props) {
           longitudeDelta: 0.05,
         }}
       >
-        {/* adding pin to map */}
-        <Marker
-          coordinate={{
-            latitude: 51.0447,
-            longitude: -114.0719,
-          }}
-        >
-          {/*make the pin clickable */}
-          <Callout
-            onPress={() => {
-              // go to profile screen when pin is tapped
-              navigation.navigate('Profile', { githubUsername });
-            }}
-          >
-            {/* shows up name bubble on pin */}
-            <View>
-              <Text style={styles.calloutText}>{githubUsername}</Text>
-              <Text style={styles.calloutHint}> view profile →</Text>
-            </View>
-          </Callout>
-        </Marker>
+    {/* marker that shows the current user */}
+    <UserMarker
+        githubUsername={githubUsername}
+        latitude={51.0447}
+        longitude={-114.0719}
+        onPress={() => navigation.navigate('Profile', { githubUsername })}
+    />
+
       </MapView>
     </View>
   );
@@ -79,14 +70,6 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
-  },
-  calloutText: {
-    fontWeight: 'bold',
-    fontSize: 16,
-  },
-  calloutHint: {
-    fontSize: 15,
-    color: 'gray',
   },
 
    logoutButton: {
