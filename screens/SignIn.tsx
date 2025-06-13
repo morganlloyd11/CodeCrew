@@ -44,20 +44,20 @@ export default function SignIn({ navigation }: Props) {
       }
     } catch (error) {
       // if the username doesn’t exist
-      Alert.alert('There is no such username on GitHub.');
+      Alert.alert('github user does not exist :(');
     }
   };
 
   return (
     <View style={styles.container}>
-      <StatusBar style="dark" />
+      <StatusBar style="dark"/>
 
       {/* welcome text at the top */}
       <Text style={styles.title}>CODE CREW</Text>
 
       {/* input where the user types their GitHub username */}
       <TextInput
-        placeholder="Enter your GitHub username"
+        placeholder="please enter your github user name :)"
         style={styles.input}
         value={username}
         onChangeText={setUsername}
@@ -78,16 +78,18 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 22,
     justifyContent: 'center',
-    backgroundColor: '#fff',
+    backgroundColor: '#fff1eb',
   },
   title: {
     fontSize: 40,
     marginBottom: 24,
     textAlign: 'center',
+    color: '#7360f9',
   },
   input: {
+    
     borderWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#b9d440',
     borderRadius: 6,
     paddingHorizontal: 16,
     height: 48,
@@ -95,9 +97,10 @@ const styles = StyleSheet.create({
     marginBottom: 16,
   },
   button: {
-    backgroundColor: '#031A62',
+    backgroundColor: '#bc9bf3',
     height: 48,
     justifyContent: 'center',
+    borderRadius: 6,
   },
   buttonText: {
     color: '#fff',

@@ -26,7 +26,7 @@ export default function Profile({ route }: Props) {
     <>
       <StatusBar hidden />
 
-      {/* shows github page in app*/}
+      {/* show github page in app*/}
       <WebView
       //make fullscreen
         style={{ flex: 1 }}

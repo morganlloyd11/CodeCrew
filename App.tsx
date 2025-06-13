@@ -4,7 +4,7 @@ import React from 'react';
 // import navigation container
 import { NavigationContainer } from '@react-navigation/native';
 
-// import gesture root view (needed for buttons & gestures to work!)
+// import gesture root view
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // import your nav stack
@@ -15,7 +15,7 @@ import { StyleSheet } from 'react-native';
 
 export default function App() {
   return (
-    // gesture handler must wrap the entire app
+    // gesture handler wrapping over nav and app
     <GestureHandlerRootView style={styles.container}>
       <NavigationContainer>
         <AppNavigator />
@@ -24,7 +24,7 @@ export default function App() {
   );
 }
 
-// full screen style for the gesture container
+// styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

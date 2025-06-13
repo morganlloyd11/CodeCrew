@@ -46,7 +46,7 @@ export default function AppNavigator() {
         title: 'GitHub Profile',
         headerShown: true,
         headerStyle: {
-      backgroundColor: '#031A62',
+      backgroundColor: '#bc9bf3',
     },
     headerTintColor: '#fff', 
     headerTitleAlign: 'center',
