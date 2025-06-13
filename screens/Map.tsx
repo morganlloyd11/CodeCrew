@@ -10,6 +10,9 @@ import { View, StyleSheet, Dimensions, Text } from 'react-native';
 // import user marker component
 import UserMarker from '../components/UserMarker';
 
+// status bar 
+import { StatusBar } from 'expo-status-bar';
+
 // mobile button
 import { RectButton } from 'react-native-gesture-handler';
 
@@ -32,7 +35,9 @@ export default function Map({ route, navigation }: Props) {
   };
 
   return (
+    
     <View style={styles.container}>
+        <StatusBar style="dark" />
         {/* sign out button */}
         <RectButton style={styles.logoutButton} onPress={handleSignOut}>
         <Text style={styles.logoutText}>Sign Out</Text>

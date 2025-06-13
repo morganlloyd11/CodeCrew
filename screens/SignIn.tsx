@@ -52,7 +52,6 @@ export default function SignIn({ navigation }: Props) {
     <View style={styles.container}>
       <StatusBar style="dark"/>
 
-      {/* welcome text at the top */}
       <Text style={styles.title}>CODE CREW</Text>
 
       {/* input where the user types their GitHub username */}

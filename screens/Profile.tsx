@@ -24,7 +24,7 @@ export default function Profile({ route }: Props) {
 
   return (
     <>
-      <StatusBar hidden />
+      <StatusBar style="dark" />
 
       {/* show github page in app*/}
       <WebView
