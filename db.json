@@ -3,36 +3,45 @@
     {
       "id": "3a09",
       "username": "morganlloyd11",
-      "name": null,
+      "name": "Morgan Lloyd",
       "avatar_url": "https://avatars.githubusercontent.com/u/195494593?v=4",
-      "bio": null,
+      "bio": "happy to be here",
+      "latitude": 51.03155,
+      "longitude": -114.1069
+    },
+    {
+      "id": "2a10",
+      "username": "alfongrace",
+      "name": "Grace",
+      "avatar_url": "https://avatars.githubusercontent.com/u/167566103?v=4",
+      "bio": "Frontend dev from YYC",
+      "latitude": 51.045,
+      "longitude": -114.071
+    },
+    {
+      "id": "3b11",
+      "username": "l-lavapie071",
+      "name": "Lyndon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/152883983?v=4",
+      "bio": "React native student",
+      "latitude": 51.05,
+      "longitude": -114.09
+    },
+    {
+      "id": "ecc0",
+      "username": "morganlloyd",
+      "name": "Morgan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55657946?v=4",
+      "bio": "software dev student | future apprentice",
       "latitude": 51.031550420343684,
       "longitude": -114.10690020263881
     },
     {
-      "id": "faf0",
-      "username": "morganlloyd11",
-      "name": null,
-      "avatar_url": "https://avatars.githubusercontent.com/u/195494593?v=4",
-      "bio": null,
-      "latitude": 51.031550420343684,
-      "longitude": -114.10690020263881
-    },
-    {
-      "id": "f90f",
-      "username": "morganlloyd11",
-      "name": null,
-      "avatar_url": "https://avatars.githubusercontent.com/u/195494593?v=4",
-      "bio": null,
-      "latitude": 51.031550420343684,
-      "longitude": -114.10690020263881
-    },
-    {
-      "id": "3f7e",
-      "username": "morganlloyd11",
-      "name": null,
-      "avatar_url": "https://avatars.githubusercontent.com/u/195494593?v=4",
-      "bio": null,
+      "id": "d107",
+      "username": "morganlloyd",
+      "name": "Morgan",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55657946?v=4",
+      "bio": "software dev student | future apprentice",
       "latitude": 51.031550420343684,
       "longitude": -114.10690020263881
     }
