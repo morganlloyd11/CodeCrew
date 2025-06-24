@@ -1,5 +1,5 @@
 // import react
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import map view and marker
 import MapView, { Marker, Callout } from 'react-native-maps';
@@ -22,6 +22,9 @@ import { NativeStackScreenProps } from '@react-navigation/native-stack';
 // import shared nav types
 import { RootStackParamList } from '../types';
 
+// fetch all users from backend
+import { getAllUsers } from '../services/api';
+
 // set up props so we can get githubUsername
 type Props = NativeStackScreenProps<RootStackParamList, 'Map'>;
 
@@ -29,38 +32,62 @@ type Props = NativeStackScreenProps<RootStackParamList, 'Map'>;
 export default function Map({ route, navigation }: Props) {
   const { githubUsername } = route.params;
 
+  // store the list of users to show on the map
+  const [users, setUsers] = useState([]);
+
+  // fetch users from backend when screen loads
+  useEffect(() => {
+    const loadUsers = async () => {
+      const data = await getAllUsers();
+      console.log('fetched users:', data);
+      setUsers(data);
+    };
+
+    loadUsers();
+  }, []);
+
   // function to send user back to SignIn screen
   const handleSignOut = () => {
     navigation.replace('SignIn');
   };
 
   return (
-    
     <View style={styles.container}>
-        <StatusBar style="dark" />
-        {/* sign out button */}
-        <RectButton style={styles.logoutButton} onPress={handleSignOut}>
+      <StatusBar style="dark" />
+
+      {/* sign out button */}
+      <RectButton style={styles.logoutButton} onPress={handleSignOut}>
         <Text style={styles.logoutText}>Sign Out</Text>
       </RectButton>
-      {/* set up the size and location of map */}
+
+      {/* map view that fills screen */}
       <MapView
         style={styles.map}
-        // hard coded coordinates for dt yyc 
         initialRegion={{
+          // downtown yyc
           latitude: 51.0447,
           longitude: -114.0719,
           latitudeDelta: 0.05,
           longitudeDelta: 0.05,
         }}
       >
-    {/* marker that shows the current user */}
-    <UserMarker
-        githubUsername={githubUsername}
-        latitude={51.0447}
-        longitude={-114.0719}
-        onPress={() => navigation.navigate('Profile', { githubUsername })}
-    />
-
+        {/* show a pin for each user */}
+        {users.map((user: any, index: number) => (
+          <Marker
+            key={index}
+            coordinate={{
+              latitude: user.latitude,
+              longitude: user.longitude,
+            }}
+          >
+            {/* tap to go to profile screen */}
+            <Callout onPress={() => navigation.navigate('Profile', { githubUsername: user.username })}>
+              <View style={{ alignItems: 'center' }}>
+                <Text>@{user.username}</Text>
+              </View>
+            </Callout>
+          </Marker>
+        ))}
       </MapView>
     </View>
   );
@@ -77,7 +104,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get('window').height,
   },
 
-   logoutButton: {
+  logoutButton: {
     position: 'absolute',
     top: 48,
     right: 24,
@@ -90,5 +117,5 @@ const styles = StyleSheet.create({
   logoutText: {
     color: 'white',
     fontSize: 14,
-  }
+  },
 });

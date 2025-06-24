@@ -19,6 +19,12 @@ import { RootStackParamList } from '../types';
 // function to check if github username exists
 import { getUserInfo } from '../services/github';
 
+// get phone location
+import * as Location from 'expo-location';
+
+// send requests to backend
+import axios from 'axios';
+
 // set up the nav props
 type Props = NativeStackScreenProps<RootStackParamList, 'SignIn'>;
 
@@ -28,25 +34,53 @@ export default function SignIn({ navigation }: Props) {
   const [username, setUsername] = useState('');
 
   // this runs when the user taps the sign button
-  const handleSignUp = async () => {
-    if (!username) {
-      Alert.alert('Please enter a GitHub username.');
+const handleSignUp = async () => {
+  // if the input box is empty show alert
+  if (!username) {
+    Alert.alert('please enter a github username :)');
+    return;
+  }
+
+  try {
+    // get github user info from api
+    const user = await getUserInfo(username);
+
+    // if no user is returned show an error
+    if (!user) {
+      Alert.alert('github user not found');
       return;
     }
 
-    try {
-      // fetch user from GitHub
-      const user = await getUserInfo(username);
-
-      if (user) {
-        // if returns a valid user go to the map screen
-        navigation.replace('Map', { githubUsername: username });
-      }
-    } catch (error) {
-      // if the username doesn’t exist
-      Alert.alert('github user does not exist :(');
+    // ask for location permission from the phone
+    const { status } = await Location.requestForegroundPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('location permission denied :(');
+      return;
     }
-  };
+
+    // get the user's gps coordinates
+    const location = await Location.getCurrentPositionAsync({});
+    const { latitude, longitude } = location.coords;
+
+    // send the user info to json-server to "register"
+    await axios.post('http://10.0.0.151:3001/users', {
+      username: username,
+      name: user.name,
+      avatar_url: user.avatar_url,
+      bio: user.bio,
+      latitude,
+      longitude,
+    });
+
+    // navigate to the map screen
+    navigation.replace('Map', { githubUsername: username });
+
+  } catch (error) {
+    // if anything goes wrong show a msg
+    console.log(error);
+    Alert.alert('something went wrong... try again?');
+  }
+};
 
   return (
     <View style={styles.container}>
