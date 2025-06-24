@@ -39,7 +39,7 @@ export default function Map({ route, navigation }: Props) {
   useEffect(() => {
     const loadUsers = async () => {
       const data = await getAllUsers();
-      console.log('fetched users:', data);
+      // console.log('fetched users:', data);
       setUsers(data);
     };
 
@@ -80,12 +80,16 @@ export default function Map({ route, navigation }: Props) {
               longitude: user.longitude,
             }}
           >
-            {/* tap to go to profile screen */}
-            <Callout onPress={() => navigation.navigate('Profile', { githubUsername: user.username })}>
-              <View style={{ alignItems: 'center' }}>
-                <Text>@{user.username}</Text>
-              </View>
-            </Callout>
+      {/* tap to go to profile screen */}
+      <Callout onPress={() => navigation.navigate('Profile', { githubUsername: user.username })}>
+       <View style={{ alignItems: 'center' }}>
+      {/* username in bold */}
+      <Text style={{ fontWeight: 'bold' }}>@{user.username}</Text>
+      {/* view profile prompt */}
+      <Text style={{ color: '#888', fontSize: 12 }}>view profile →</Text>
+      </View>
+      </Callout>
+
           </Marker>
         ))}
       </MapView>
